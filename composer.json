@@ -1,0 +1,11 @@
+{
+    "name": "guill/touche-pas-au-klaxon",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "bramus/router": "^1.6"
+    }
+}

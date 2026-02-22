@@ -1,3 +1,35 @@
 <?php
 
-echo "<h1>Touche pas au klaxon</h1>";
+// Charge l'autoloader de Composer pour gérer automatiquement les classes
+require __DIR__ . '/../vendor/autoload.php';
+
+// Import du contrôleur principal
+use App\Controllers\HomeController;
+
+// Création d'une instance du routeur (Bramus Router)
+$router = new \Bramus\Router\Router();
+
+// ======================
+// Définition des routes
+// ======================
+
+// Page d'accueil "/"
+$router->get('/', function() {
+    $controller = new HomeController();
+    $controller->index();
+});
+
+// ======================
+// Gestion des erreurs
+// ======================
+
+// Route exécutée si aucune URL ne correspond (erreur 404)
+$router->set404(function() {
+    header('HTTP/1.1 404 Not Found');
+    echo "<h1>Page introuvable</h1>";
+});
+
+// ======================
+// Lancement du routeur
+// ======================
+$router->run();
