@@ -19,6 +19,8 @@ class UserModel {
 
     /**
      * Constructeur : récupére la connexion PDO
+     * 
+     * @return void
      */
     public function __construct() {
         $this->pdo = Database::getConnection();
