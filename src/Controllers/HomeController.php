@@ -18,6 +18,7 @@ class HomeController {
      * @return void
      */
     public function index(): void {
-        require __DIR__ . '/../Views/home.php';
+        $view = 'home';
+        require __DIR__ . '/../Views/layouts/main.php';
     }
 }
