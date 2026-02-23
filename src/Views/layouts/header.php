@@ -5,7 +5,7 @@
             
             <!-- Connexion -->
             <div class="d-flex">
-                <a href="connexion.php" class="text-light"><strong>Connexion</strong></a>
+                <a href="<?= BASE_URL ?>/auth" class="text-light"><strong>Connexion</strong></a>
             </div>
         </div>
     </nav>
