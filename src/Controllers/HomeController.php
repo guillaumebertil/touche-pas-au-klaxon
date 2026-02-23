@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\TripModel;
+
 /**
  * Contrôleur responsable de la gestion de la page d'accueil
  * 
@@ -18,6 +20,10 @@ class HomeController {
      * @return void
      */
     public function index(): void {
+        
+        $tripModel = new TripModel();
+        $trips = $tripModel->getTrips();
+        
         $view = 'home';
         require __DIR__ . '/../Views/layouts/main.php';
     }
