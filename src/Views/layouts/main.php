@@ -6,13 +6,15 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/main.css">
     <title>Touche pas au klaxon</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- Header -->
     <?php require 'header.php' ?>
 
     <!-- Main -->
-    <?php require __DIR__ . '/../' . $view . '.php'; ?>
+    <div class="d-flex justify-content-center align-items-center flex-grow-1 bg-light">
+        <?php require __DIR__ . '/../' . $view . '.php'; ?>
+    </div>
     
     <!-- Footer -->
     <?php require 'footer.php' ?>
