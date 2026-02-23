@@ -3,6 +3,9 @@
 // Charge l'autoloader de Composer pour gérer automatiquement les classes
 require __DIR__ . '/../vendor/autoload.php';
 
+// Définit le chemin absolu
+define('BASE_URL', '/touche-pas-au-klaxon/public');
+
 // Import du contrôleur principal
 use App\Controllers\HomeController;
 
