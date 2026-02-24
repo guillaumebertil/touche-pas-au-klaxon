@@ -84,4 +84,30 @@ class AuthController {
             exit;
         }
     }
+
+    /**
+     * Traite la déconnexion
+     * 
+     * Cette méthode est appelée lorsque l'utlisateur se déconnecte via le bouton de déconnexion
+     * 
+     * @return void
+     */
+    public function logout(): void {
+
+        // Détruire toutes les variables de session
+        session_unset();
+
+        // Détruire la session
+        session_destroy();
+
+        // Redémarrer une nouvelle session
+        session_start();
+
+        // Afficher un message flash
+        $_SESSION['flash-success'] = "Vous avez été déconecté avec succès";
+
+        // Redirige vers l'accueil
+        header('Location: ' . BASE_URL . '/');
+        exit;
+    }
 }
