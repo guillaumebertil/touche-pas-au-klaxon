@@ -38,6 +38,12 @@ $router->post('/auth', function() {
     $controller->login();
 });
 
+// Traite la déconnexion
+$router->get('/logout', function() {
+    $controller = new AuthController();
+    $controller->logout();
+});
+
 // ======================
 // Gestion des erreurs
 // ======================
