@@ -49,6 +49,7 @@ class AuthController {
                 $_SESSION['nom']     = $userData['nom'];
                 $_SESSION['prenom']  = $userData['prenom'];
                 $_SESSION['role_id'] = $userData['role_id'];
+                $_SESSION['user_id'] = $userData['id'];
 
                 // Affiche un message flash
                 $_SESSION['flash-success'] = "Connexion réussie";
