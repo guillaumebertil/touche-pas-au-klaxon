@@ -5,6 +5,12 @@
         unset ($_SESSION['flash-success']);
     } ?>
 
+    <!-- Message d'erreur -->
+    <?php if (isset($_SESSION['flash-error'])) {
+        echo "<div class='alert alert-danger' role='alert'>{$_SESSION['flash-error']}</div>";
+        unset ($_SESSION['flash-error']);
+    } ?>
+
     <!-- Tableau des trajets disponibles -->
     <div class="container">
         <div class="container text-center">

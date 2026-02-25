@@ -35,6 +35,7 @@ class AuthController {
 
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
+        // Créer une instance du modèle
         $userModel = new UserModel();
 
         $userData = $userModel->findByEmail($_POST['email']);
