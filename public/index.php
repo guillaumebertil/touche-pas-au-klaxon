@@ -12,6 +12,7 @@ define('BASE_URL', '/touche-pas-au-klaxon/public');
 // Import des contrôllers
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
+use App\Controllers\TripController;
 
 // Création d'une instance du routeur (Bramus Router)
 $router = new \Bramus\Router\Router();
@@ -42,6 +43,18 @@ $router->post('/auth', function() {
 $router->get('/logout', function() {
     $controller = new AuthController();
     $controller->logout();
+});
+
+// Affiche le formulaire de création de trajet
+$router->get('/form', function() {
+    $controller = new TripController();
+    $controller->showForm();
+});
+
+// Traite le formulaire de création de trajet
+$router->post('/form', function() {
+    $controller = new TripController();
+    $controller->create();
 });
 
 // ======================

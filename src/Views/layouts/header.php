@@ -10,8 +10,13 @@
 
                     <!-- Utilisateur connecté -->
                     <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1): ?>
+                        <!-- Identifiants de l'utilisateur -->
                         <li class="nav-item text-light"><?php echo "Bonjour {$_SESSION['nom']}  {$_SESSION['prenom']}" ?></li>
-                        <li class="nav-item text-light mx-3"><a class="btn btn-secondary" href="<?= BASE_URL ?>#">Créer un trajet</a></li>
+
+                        <!-- Créer un trajet -->
+                        <li class="nav-item text-light mx-3"><a class="btn btn-secondary" href="<?= BASE_URL ?>/form">Créer un trajet</a></li>
+
+                        <!-- Déconnexion -->
                         <li class="nav-item"><a class="btn btn-danger" href="<?= BASE_URL ?>/logout">Déconnexion</a></li>
                         
                     <!-- Administrateur connecté -->
