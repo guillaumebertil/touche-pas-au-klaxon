@@ -54,6 +54,28 @@ class TripModel {
     }
 
     /**
+     * Récupère un trajet par l'ID
+     * 
+     * @param int $trajet_id ID du trajet
+     * 
+     * @return array|false
+     * @throws \PDOException
+     */
+    public function getTrajetById(int $trajet_id): array|false {
+        $sql = "SELECT *
+                FROM trajets
+                WHERE id = :trajet_id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([
+            ':trajet_id' => $trajet_id
+        ]);
+
+        return $stmt->fetch();
+    }
+
+    /**
      * Créer un nouveau trajet
      * 
      * @param int $user_id ID de l'utilisateur
@@ -79,6 +101,58 @@ class TripModel {
             ':date_arrivee'             => $date_arrivee,
             ':nb_total_places'          => $nb_total_places,
             ':nb_total_places_dispo'    => $nb_total_places_dispo
+        ]);
+    }
+
+    /**
+     * Modifie un trajet
+     * 
+     * @param int $agence_depart_id ID de l'agence de départ
+     * @param int $agence_arrive_id ID de l'agence d'arrivée
+     * @param string $date_depart Date de départ
+     * @param string $date_arrivee Date d'arrivée
+     * @param int $nb_total_places Nombre total de place
+     * @param int $nb_total_places_dispo Nombre total de places disponibles
+     * @param int $trajet_id ID du trajet
+     * 
+     * @return bool True si la modification réussie, false sinon
+     */
+    public function updateTrip(int $agence_depart_id, int $agence_arrive_id, string $date_depart, string $date_arrivee, int $nb_total_places, int $nb_total_places_dispo, int $trajet_id): bool {
+        $sql = "UPDATE trajets
+                SET agence_depart_id = :agence_depart_id,
+                    agence_arrivee_id = :agence_arrivee_id,
+                    date_depart = :date_depart,
+                    date_arrivee = :date_arrivee,
+                    nb_total_places = :nb_total_places,
+                    nb_total_places_dispo = :nb_total_places_dispo
+                WHERE trajets.id = :trajet_id";
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute([
+            ':agence_depart_id'         => $agence_depart_id,
+            ':agence_arrivee_id'        => $agence_arrive_id,
+            ':date_depart'              => $date_depart,
+            ':date_arrivee'             => $date_arrivee,
+            ':nb_total_places'          => $nb_total_places,
+            ':nb_total_places_dispo'    => $nb_total_places_dispo,
+            ':trajet_id'               => $trajet_id
+        ]);
+    }
+
+    /**
+     * Supprime un trajet
+     * 
+     * @param int $trajet_id ID du trajet
+     * 
+     * @return bool True si la suppresion réussie, false sinon
+     */
+    public function deleteTrip(int $trajet_id): bool {
+        $sql = "DELETE FROM trajets
+                WHERE trajets.id = :trajet_id";
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute([
+            ':trajet_id' => $trajet_id
         ]);
     }
 }

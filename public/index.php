@@ -57,6 +57,24 @@ $router->post('/form', function() {
     $controller->create();
 });
 
+// Affiche le formulaire de modification de trajet
+$router->get('/updateForm', function() {
+    $controller = new TripController();
+    $controller->showUpdateForm();
+});
+
+// Traite le formulaire de modification de trajet
+$router->post('/updateForm', function() {
+    $controller = new TripController();
+    $controller->update();
+});
+
+// Traite la suppression de trajet
+$router->post('/delete', function() {
+    $controller = new TripController();
+    $controller->delete();
+});
+
 // ======================
 // Gestion des erreurs
 // ======================
