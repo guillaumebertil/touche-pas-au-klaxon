@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Core\BaseController;
+
 use App\Models\TripModel;
 use App\Models\AgenceModel;
 
@@ -11,7 +13,7 @@ use App\Models\AgenceModel;
  * 
  * @package App\Controllers
  */
-class TripController {
+class TripController extends BaseController{
 
     /**
      * Affiche le formulaire de création d'un trajet
@@ -210,23 +212,6 @@ class TripController {
     }
 
     /**
-     * Vérifie que tous les champs requis sont présents et non vides
-     * 
-     * @param array $fields Tableau contenant les champs à vérifier
-     * @param array $data Données à vérifier (ex: $_POST)
-     * 
-     * @return bool true si tous les champs sont remplis, false sinon
-     */
-    private function checkRequiredFields(array $fields, array $data): bool {
-        foreach ($fields as $field) {
-            if (empty($data[$field])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Vérifie que l'agence de départ est différente de celle d'arrivée
      * 
      * @param string $agence_depart Agence de départ
@@ -248,28 +233,5 @@ class TripController {
      */
     private function isValidOrder(string $date_depart, string $date_arrivee): bool {
         return strtotime($date_depart) < strtotime($date_arrivee);
-    }
-
-    /**
-     * Vérifie que le nombre de places est cohérent
-     * 
-     * @param int $nb_total_places Nombre total de places dans la voiture
-     * @param int $nb_total_places_dispo Nombre de places disponible pour les passagers
-     * 
-     * @return bool true si cohérent, false sinon
-     */
-    private function hasSufficientSeats(int $nb_total_places, int $nb_total_places_dispo): bool {
-        return $nb_total_places_dispo > 0 && $nb_total_places_dispo < $nb_total_places;
-    }
-
-    /**
-     * Rediriger vers une URL
-     * 
-     * @param string $path URL de redirection
-     * @return void
-     */
-    private function redirect(string $path): void {
-        header('Location: ' . BASE_URL . $path);
-        exit;
     }
 }

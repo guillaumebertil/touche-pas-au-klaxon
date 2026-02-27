@@ -35,42 +35,42 @@ class AuthController extends BaseController{
      */
     public function login(): void {
 
-        if (!empty($_POST['email']) && !empty($_POST['password'])) {
+        $requiredFields = [
+            'email',
+            'password'
+        ];
 
-        // Créer une instance du modèle
+        // Vérifier que les champs email et mot de passe sont remplis
+        if(!$this->checkRequiredFields($requiredFields, $_POST)) {
+            $_SESSION['flash-error'] = "Tous les champs sont requis";
+            $this->redirect('/auth');
+        }
+
+        // Créer une instance
         $userModel = new UserModel();
-
         $userData = $userModel->findByEmail($_POST['email']);
 
-        if ($userData) {
-
-            // Vérifier le mot de passe
-            $passwordCheck = password_verify($_POST['password'], $userData['password']);
-
-            if ($passwordCheck) {
-                // Stocker les données dans la session
-                $_SESSION['nom']     = $userData['nom'];
-                $_SESSION['prenom']  = $userData['prenom'];
-                $_SESSION['role_id'] = $userData['role_id'];
-                $_SESSION['user_id'] = $userData['id'];
-
-                $_SESSION['flash-success'] = "Connexion réussie";
-                $this->redirect('/');
-
-            } else {
-                $_SESSION['flash-error'] = "Email ou mot de passe incorrecte";
-                $this->redirect('/auth');
-            }
-
-        } else {
-            $_SESSION['flash-error'] = "Email ou mot de passe incorrecte";
+        if(!$userData) {
+            $_SESSION['flash-error'] = "Email ou mot de passe incorrect";
             $this->redirect('/auth');
         }
-            
-        } else {
-            $_SESSION['flash-error'] = "Les 2 champs sont obligatoires";
+
+        // Vérifier le mot de passe
+        $passwordCheck = password_verify($_POST['password'], $userData['password']);
+
+        if(!$passwordCheck) {
+            $_SESSION['flash-error'] = "Email ou mot de passe incorrect";
             $this->redirect('/auth');
         }
+
+        // Stocker les données dans la session
+        $_SESSION['nom']     = $userData['nom'];
+        $_SESSION['prenom']  = $userData['prenom'];
+        $_SESSION['role_id'] = $userData['role_id'];
+        $_SESSION['user_id'] = $userData['id'];
+
+        $_SESSION['flash-success'] = "Connexion réussie";
+        $this->redirect('/');
     }
 
     /**

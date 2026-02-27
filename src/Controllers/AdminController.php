@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Core\BaseController;
+
 use App\Models\AgenceModel;
 use App\Models\TripModel;
 use App\Models\UserModel;
@@ -11,7 +13,7 @@ use App\Models\UserModel;
  * 
  * @package App\Controllers
  */
-class AdminController {
+class AdminController extends BaseController{
 
     /**
      * Affiche le tableau de bord
@@ -191,33 +193,5 @@ class AdminController {
             $_SESSION['flash-success'] = "Trajet supprimé avec succès";
             $this->redirect('/dashboard/trajets');
         }
-    }
-
-    /**
-     * Vérifie que tous les champs requis sont présents et non vides
-     * 
-     * @param array $fields Tableau contenant les champs à vérifier
-     * @param array $data Données à vérifier (ex: $_POST)
-     * 
-     * @return bool true si tous les champs sont remplis, false sinon
-     */
-    private function checkRequiredFields(array $fields, array $data): bool {
-        foreach ($fields as $field) {
-            if (empty($data[$field])) {
-                return false;
-            }
-        }
-        return true;
-    }    
-
-    /**
-     * Rediriger vers une URL
-     * 
-     * @param string $path URL de redirection
-     * @return void
-     */
-    private function redirect(string $path): void {
-        header('Location: ' . BASE_URL . $path);
-        exit;
     }
 }
