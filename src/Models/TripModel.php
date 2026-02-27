@@ -27,6 +27,32 @@ class TripModel {
     }
 
     /**
+     * Récupéer la liste de toutes les trajets
+     * 
+     * @return array Liste ds trajets
+     * @throws \PDOException
+     */
+    public function getAllTrips(): array|false {
+        $sql = "SELECT agences_depart.ville AS ville_depart,
+                       agences_arrivee.ville AS ville_arrivee,
+                       trajets.id AS trajet_id,
+                       date_depart, date_arrivee, nb_total_places_dispo, nb_total_places,
+                       user_id,
+                       users.nom AS user_nom,
+                       users.prenom AS user_prenom,
+                       users.telephone AS user_telephone,
+                       users.email AS user_email
+                FROM trajets
+                JOIN agences AS agences_depart ON trajets.agence_depart_id = agences_depart.id
+                JOIN agences AS agences_arrivee ON trajets.agence_arrivee_id = agences_arrivee.id
+                JOIN users ON trajets.user_id = users.id
+                ORDER BY date_depart ASC";
+        $stmt = $this->pdo->query($sql);
+
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Récupérer la liste des trajets disponible
      * 
      * @return array|false

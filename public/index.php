@@ -13,6 +13,7 @@ define('BASE_URL', '/touche-pas-au-klaxon/public');
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\TripController;
+use App\Controllers\AdminController;
 
 // Création d'une instance du routeur (Bramus Router)
 $router = new \Bramus\Router\Router();
@@ -73,6 +74,54 @@ $router->post('/updateForm', function() {
 $router->post('/delete', function() {
     $controller = new TripController();
     $controller->delete();
+});
+
+// Affiche le dashboard
+$router->get('/dashboard', function() {
+    $controller = new AdminController();
+    $controller->dashboard();
+});
+
+// Affiche la liste des utilisateurs
+$router->get('/dashboard/users', function() {
+    $controller = new AdminController();
+    $controller->showUsers();
+});
+
+// Affiche la liste des agences
+$router->get('/dashboard/agences', function() {
+    $controller = new AdminController();
+    $controller->showAgences();
+});
+
+// Traite le formulaire de création d'agence
+$router->post('/dashboard/agences', function() {
+    $controller = new AdminController();
+    $controller->createAgence();
+});
+
+// Traite le formulaire de modification d'agence
+$router->post('/dashboard/updateAgences', function() {
+    $controller = new AdminController();
+    $controller->updateAgence();
+});
+
+// Traite la suppression d'agence
+$router->post('/dashboard/deleteAgences', function() {
+    $controller = new AdminController();
+    $controller->deleteAgence();
+});
+
+// Affiche la liste des trajets
+$router->get('/dashboard/trajets', function() {
+    $controller = new AdminController();
+    $controller->showTrajets();
+});
+
+// Traite la suppresion de trajet
+$router->post('/dashboard/deleteTrajets', function() {
+    $controller = new AdminController();
+    $controller->deleteTrip();
 });
 
 // ======================

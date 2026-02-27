@@ -7,7 +7,7 @@ use App\Models\AgenceModel;
 
 /**
  * Contrôleur des trajets
- * Gère l'affichage du formulaire et la création d'un trajet
+ * Gère la création, la consultation, la modification et suppression d'un trajet
  * 
  * @package App\Controllers
  */
