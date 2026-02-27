@@ -2,7 +2,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-dark navbar-expand-lg bg-primary px-5" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="<?= BASE_URL ?>">Touche pas au klaxon</a>
+            <a class="navbar-brand" href="<?= isset($_SESSION['role_id']) && $_SESSION['role_id'] === 2 ? BASE_URL . '/dashboard' : BASE_URL; ?>">Touche pas au klaxon</a>
             
             <!-- Connexion/déconnexion -->
             <div class="d-flex">
@@ -26,11 +26,9 @@
                             Tableau de bord
                             </a>
                             <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Liste des utilisateurs</a>
-                                <a class="dropdown-item" href="#">Liste des agences</a>
-                                <a class="dropdown-item" href="#">Créer, modifier ou supprimer une ageance</a>
-                                <a class="dropdown-item" href="#">Liste des trajets</a>
-                                <a class="dropdown-item" href="#">Supprimer un trajet</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>/dashboard/users">Liste des utilisateurs</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>/dashboard/agences">Liste des agences</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>/dashboard/trajets">Liste des trajets</a>
                             </div>
                         </li>
                         <li class="nav-item"><a class="btn btn-danger" href="<?= BASE_URL ?>/logout">Déconnexion</a></li>
