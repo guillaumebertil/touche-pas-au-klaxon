@@ -21,10 +21,7 @@ class AdminController extends BaseController{
      * @return void
      */
     public function dashboard(): void {
-
-       $view = 'dashboard';
-        require __DIR__ . '/../Views/layouts/main.php';
-
+        $this->render('dashboard');
     }
 
     /**
@@ -37,8 +34,7 @@ class AdminController extends BaseController{
         $usersModel = new UserModel();
         $users = $usersModel->getAllUsers();
 
-        $view = 'dashboard/users';
-        require __DIR__ . '/../Views/layouts/main.php';
+        $this->render('dashboard/users', ['users' => $users]);
     }
 
     /**
@@ -51,8 +47,7 @@ class AdminController extends BaseController{
         $agenceModel = new AgenceModel();
         $agences = $agenceModel->getAgences();
 
-        $view = 'dashboard/agences';
-        require __DIR__ . '/../Views/layouts/main.php';
+        $this->render('dashboard/agences', ['agences' => $agences]);
     }
 
     /**
@@ -65,8 +60,7 @@ class AdminController extends BaseController{
         $trajetsModel = new TripModel();
         $trips = $trajetsModel->getAllTrips();
 
-        $view = 'dashboard/trajets';
-        require __DIR__ . '/../Views/layouts/main.php';
+        $this->render('dashboard/trajets', ['trips' => $trips]);
     }
 
     /**

@@ -22,8 +22,8 @@ class AuthController extends BaseController{
      * @return void
      */
     public function index(): void {
-        $view = 'auth';
-        require __DIR__ . '/../Views/layouts/main.php';
+        
+        $this->render('auth');
     }
 
     /**

@@ -25,8 +25,7 @@ class TripController extends BaseController{
         $agenceModel = new AgenceModel();
         $agences = $agenceModel->getAgences();
 
-        $view = 'form';
-        require __DIR__ . '/../Views/layouts/main.php';
+        $this->render('form', ['agences' => $agences]);
     }
 
     /**
@@ -44,8 +43,7 @@ class TripController extends BaseController{
         $trajet_id = (int) $_GET['trajet_id'];
         $trajet = $tripModel->getTrajetById($trajet_id);
 
-        $view = 'updateForm';
-        require __DIR__ . '/../Views/layouts/main.php';
+        $this->render('updateForm', ['agences' => $agences, 'trajet' => $trajet]);
     }
 
     /**
