@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Core\BaseController;
+
 use App\Models\TripModel;
 
 /**
@@ -9,7 +11,7 @@ use App\Models\TripModel;
  * 
  * @package App\Controllers
  */
-class HomeController {
+class HomeController extends BaseController {
 
     /**
      * Affiche la page d'accueil
@@ -24,7 +26,6 @@ class HomeController {
         $tripModel = new TripModel();
         $trips = $tripModel->getTrips();
         
-        $view = 'home';
-        require __DIR__ . '/../Views/layouts/main.php';
+        $this->render('home', ['trips' => $trips]);
     }
 }
