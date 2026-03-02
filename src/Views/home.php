@@ -18,6 +18,8 @@
                 <!-- Si l'utilisateur est connecté, affiche la colonne détails et actions -->
                 <?php if(isset($_SESSION['role_id'])) : ?>
                     <th>Détails</th>
+                <?php endif ?>
+                <?php if(isset($_SESSION['role_id']) === 1) : ?>
                     <th>Actions</th>
                 <?php endif ?>
             </tr>
