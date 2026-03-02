@@ -232,4 +232,16 @@ class TripController extends BaseController{
     private function isValidOrder(string $date_depart, string $date_arrivee): bool {
         return strtotime($date_depart) < strtotime($date_arrivee);
     }
+
+    /**
+     * Vérifie que le nombre de places est cohérent
+     * 
+     * @param int $nb_total_places Nombre total de places dans la voiture
+     * @param int $nb_total_places_dispo Nombre de places disponible pour les passagers
+     * 
+     * @return bool true si cohérent, false sinon
+     */
+    private function hasSufficientSeats(int $nb_total_places, int $nb_total_places_dispo): bool {
+        return $nb_total_places_dispo > 0 && $nb_total_places_dispo < $nb_total_places;
+    }
 }
