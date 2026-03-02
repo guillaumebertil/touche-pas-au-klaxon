@@ -110,9 +110,9 @@ http://localhost/touche-pas-au-klaxon/public
 ## Comptes de test
 
 ### Administrateur
-email: admin@example.com
-mot de passe : password123
+- email: admin@example.com
+- mot de passe: password123
 
 ### Utilisateur
-email: alexandre.martin@email.fr
-mot de passe : password123
+- email: alexandre.martin@email.fr
+- mot de passe: password123
