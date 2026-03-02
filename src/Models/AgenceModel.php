@@ -13,8 +13,8 @@ use PDO;
  * 
  * @package App\Model
  */
-class AgenceModel {
-
+class AgenceModel
+{
     private PDO $pdo;
 
     /**
@@ -22,7 +22,8 @@ class AgenceModel {
      * 
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getConnection();
     }
 
@@ -33,7 +34,8 @@ class AgenceModel {
      * 
      * @return bool True si la création réussie, false sinon
      */
-    public function createAgence(string $ville): bool {
+    public function createAgence(string $ville): bool
+    {
         $sql = "INSERT INTO agences (ville)
                 VALUES (:ville)";
 
@@ -50,7 +52,8 @@ class AgenceModel {
      * @return array|false
      * @throws \PDOException
      */
-    public function getAgences(): array|false {
+    public function getAgences(): array|false
+    {
         $sql = "SELECT *
                 FROM agences
                 ORDER BY ville ASC";
@@ -68,10 +71,12 @@ class AgenceModel {
      * 
      * @return bool True si la modification réussie, false sinon
      */
-    public function updateAgence(string $ville, int $agence_id): bool {
+    public function updateAgence(string $ville, int $agence_id): bool
+    {
         $sql = "UPDATE agences
                 SET ville = :ville
                 WHERE agences.id = :agence_id";
+
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
@@ -87,9 +92,11 @@ class AgenceModel {
      * 
      * @return bool True si la suppression réussie, false sinon
      */
-    public function deleteAgence(int $agence_id): bool {
+    public function deleteAgence(int $agence_id): bool
+    {
         $sql = "DELETE FROM agences
                 WHERE agences.id = :agences_id";
+                
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([

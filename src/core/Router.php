@@ -15,16 +15,17 @@ use App\Controllers\AdminController;
  * 
  * @package App\Core
  */
-class Router {
-
+class Router
+{
     private $router;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->router = new \Bramus\Router\Router();
     }
 
-    public function register() {
-
+    public function register()
+    {
         // Page d'accueil "/"
         $this->router->get('/', function() {
             $controller = new HomeController();
@@ -138,7 +139,8 @@ class Router {
         });
     }
 
-    public function run() {
+    public function run()
+    {
         $this->router->run();
     }
 }
