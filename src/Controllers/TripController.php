@@ -13,14 +13,16 @@ use App\Models\AgenceModel;
  * 
  * @package App\Controllers
  */
-class TripController extends BaseController{
-
+class TripController extends BaseController
+{
     /**
      * Affiche le formulaire de création d'un trajet
      * 
      * @return void
      */
-    public function showForm(): void {
+    public function showForm(): void
+    {
+        $this->requireLogged();
 
         $agenceModel = new AgenceModel();
         $agences = $agenceModel->getAgences();
@@ -33,7 +35,9 @@ class TripController extends BaseController{
      * 
      * @return void
      */
-    public function showUpdateForm(): void {
+    public function showUpdateForm(): void
+    {
+        $this->requireLogged();
 
         $agenceModel = new AgenceModel();
         $agences = $agenceModel->getAgences();
@@ -51,7 +55,9 @@ class TripController extends BaseController{
      * 
      * @return void
      */
-    public function create(): void {
+    public function create(): void
+    {
+        $this->requireLogged();
 
         $requiredFields = [
             'agence_depart_id',
@@ -121,7 +127,9 @@ class TripController extends BaseController{
      * 
      * @return void
      */
-    public function update(): void {
+    public function update(): void
+    {
+        $this->requireLogged();
 
         $trajet_id = $_POST['trajet_id'];
 
@@ -192,8 +200,10 @@ class TripController extends BaseController{
      * 
      * @return void
      */
-    public function delete(): void {
-
+    public function delete(): void
+    {
+        $this->requireLogged();
+        
         // Récupération des données
         $trajet_id = $_POST['trajet_id'];
 
@@ -217,7 +227,8 @@ class TripController extends BaseController{
      * 
      * @return bool true si différent, false sinon
      */
-    private function isDifferentAgence(string $agence_depart, string $agence_arrivee): bool {
+    private function isDifferentAgence(string $agence_depart, string $agence_arrivee): bool
+    {
         return $agence_depart !== $agence_arrivee;
     }
 
@@ -229,7 +240,8 @@ class TripController extends BaseController{
      * 
      * @return bool true si la date d'arrivée est après celle de départ, false sinon
      */
-    private function isValidOrder(string $date_depart, string $date_arrivee): bool {
+    private function isValidOrder(string $date_depart, string $date_arrivee): bool
+    {
         return strtotime($date_depart) < strtotime($date_arrivee);
     }
 
@@ -241,7 +253,8 @@ class TripController extends BaseController{
      * 
      * @return bool true si cohérent, false sinon
      */
-    private function hasSufficientSeats(int $nb_total_places, int $nb_total_places_dispo): bool {
+    private function hasSufficientSeats(int $nb_total_places, int $nb_total_places_dispo): bool
+    {
         return $nb_total_places_dispo > 0 && $nb_total_places_dispo < $nb_total_places;
     }
 }

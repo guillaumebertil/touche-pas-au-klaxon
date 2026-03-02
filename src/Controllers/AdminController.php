@@ -13,14 +13,17 @@ use App\Models\UserModel;
  * 
  * @package App\Controllers
  */
-class AdminController extends BaseController{
-
+class AdminController extends BaseController
+{
     /**
      * Affiche le tableau de bord
      * 
      * @return void
      */
-    public function dashboard(): void {
+    public function dashboard(): void
+    {
+        $this->requireAdmin();
+
         $this->render('dashboard');
     }
 
@@ -29,7 +32,9 @@ class AdminController extends BaseController{
      * 
      * @return void
      */
-    public function showUsers():void {
+    public function showUsers(): void
+    {
+        $this->requireAdmin();
 
         $usersModel = new UserModel();
         $users = $usersModel->getAllUsers();
@@ -37,12 +42,15 @@ class AdminController extends BaseController{
         $this->render('dashboard/users', ['users' => $users]);
     }
 
+
     /**
      * Affiche la liste des agences
      * 
      * @return void
      */
-    public function showAgences():void {
+    public function showAgences(): void 
+    {
+        $this->requireAdmin();
 
         $agenceModel = new AgenceModel();
         $agences = $agenceModel->getAgences();
@@ -55,7 +63,9 @@ class AdminController extends BaseController{
      * 
      * @return void
      */
-    public function showTrajets():void {
+    public function showTrajets(): void
+    {
+        $this->requireAdmin();
 
         $trajetsModel = new TripModel();
         $trips = $trajetsModel->getAllTrips();
@@ -68,7 +78,9 @@ class AdminController extends BaseController{
      * 
      * @return void
      */
-    public function createAgence(): void {
+    public function createAgence(): void
+    {
+        $this->requireAdmin();
 
         $requiredFields = [
             'ville'
@@ -100,7 +112,9 @@ class AdminController extends BaseController{
      * 
      * @return void
      */
-    public function updateAgence(): void {
+    public function updateAgence(): void
+    {
+        $this->requireAdmin();
 
         $requiredFields = [
             'ville'
@@ -132,7 +146,9 @@ class AdminController extends BaseController{
      * 
      * @return void
      */
-    public function deleteAgence(): void {
+    public function deleteAgence(): void
+    {
+        $this->requireAdmin();
 
         $requiredFields = [
             'agence_id'
@@ -163,7 +179,9 @@ class AdminController extends BaseController{
      * 
      * @return void
      */
-    public function deleteTrip(): void {
+    public function deleteTrip(): void
+    {
+        $this->requireAdmin();    
 
         $requiredFields = [
             'trajet_id'

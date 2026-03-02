@@ -13,8 +13,8 @@ use PDO;
  * 
  * @package App\Model
  */
-class TripModel {
-
+class TripModel
+{
     private PDO $pdo;
 
     /**
@@ -22,7 +22,8 @@ class TripModel {
      * 
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getConnection();
     }
 
@@ -32,7 +33,8 @@ class TripModel {
      * @return array Liste ds trajets
      * @throws \PDOException
      */
-    public function getAllTrips(): array|false {
+    public function getAllTrips(): array|false
+    {
         $sql = "SELECT agences_depart.ville AS ville_depart,
                        agences_arrivee.ville AS ville_arrivee,
                        trajets.id AS trajet_id,
@@ -47,6 +49,7 @@ class TripModel {
                 JOIN agences AS agences_arrivee ON trajets.agence_arrivee_id = agences_arrivee.id
                 JOIN users ON trajets.user_id = users.id
                 ORDER BY date_depart ASC";
+                
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll();
@@ -58,22 +61,24 @@ class TripModel {
      * @return array|false
      * @throws \PDOException
      */
-    public function getTrips(): array|false {
+    public function getTrips(): array|false
+    {
             $sql = "SELECT agences_depart.ville AS ville_depart,
-                       agences_arrivee.ville AS ville_arrivee,
-                       trajets.id AS trajet_id,
-                       date_depart, date_arrivee, nb_total_places_dispo, nb_total_places,
-                       user_id,
-                       users.nom AS user_nom,
-                       users.prenom AS user_prenom,
-                       users.telephone AS user_telephone,
-                       users.email AS user_email
-                FROM trajets
-                JOIN agences AS agences_depart ON trajets.agence_depart_id = agences_depart.id
-                JOIN agences AS agences_arrivee ON trajets.agence_arrivee_id = agences_arrivee.id
-                JOIN users ON trajets.user_id = users.id
-                WHERE date_depart > NOW() AND nb_total_places_dispo > 0
-                ORDER BY date_depart ASC";
+                            agences_arrivee.ville AS ville_arrivee,
+                            trajets.id AS trajet_id,
+                            date_depart, date_arrivee, nb_total_places_dispo, nb_total_places,
+                            user_id,
+                            users.nom AS user_nom,
+                            users.prenom AS user_prenom,
+                            users.telephone AS user_telephone,
+                            users.email AS user_email
+                    FROM trajets
+                    JOIN agences AS agences_depart ON trajets.agence_depart_id = agences_depart.id
+                    JOIN agences AS agences_arrivee ON trajets.agence_arrivee_id = agences_arrivee.id
+                    JOIN users ON trajets.user_id = users.id
+                    WHERE date_depart > NOW() AND nb_total_places_dispo > 0
+                    ORDER BY date_depart ASC";
+
         $stmt = $this->pdo->query($sql);
 
         return $stmt->fetchAll();
@@ -87,7 +92,8 @@ class TripModel {
      * @return array|false
      * @throws \PDOException
      */
-    public function getTrajetById(int $trajet_id): array|false {
+    public function getTrajetById(int $trajet_id): array|false
+    {
         $sql = "SELECT *
                 FROM trajets
                 WHERE id = :trajet_id";
@@ -114,9 +120,34 @@ class TripModel {
      * 
      * @return bool True si la création réussie, false sinon
      */
-    public function createTrip(int $user_id, int $agence_depart_id, int $agence_arrive_id, string $date_depart, string $date_arrivee, int $nb_total_places, int $nb_total_places_dispo): bool {
-        $sql = "INSERT INTO trajets (user_id, agence_depart_id, agence_arrivee_id, date_depart, date_arrivee, nb_total_places, nb_total_places_dispo)
-                VALUES (:user_id, :agence_depart_id, :agence_arrivee_id, :date_depart, :date_arrivee, :nb_total_places, :nb_total_places_dispo)";
+    public function createTrip(
+        int $user_id,
+        int $agence_depart_id,
+        int $agence_arrive_id,
+        string $date_depart,
+        string $date_arrivee,
+        int $nb_total_places,
+        int $nb_total_places_dispo
+    ): bool {
+        $sql = "INSERT INTO trajets (
+                    user_id,
+                    agence_depart_id,
+                    agence_arrivee_id,
+                    date_depart,
+                    date_arrivee,
+                    nb_total_places,
+                    nb_total_places_dispo
+                )
+                VALUES (
+                    :user_id,
+                    :agence_depart_id,
+                    :agence_arrivee_id,
+                    :date_depart,
+                    :date_arrivee,
+                    :nb_total_places,
+                    :nb_total_places_dispo
+                )";
+
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
@@ -143,15 +174,24 @@ class TripModel {
      * 
      * @return bool True si la modification réussie, false sinon
      */
-    public function updateTrip(int $agence_depart_id, int $agence_arrive_id, string $date_depart, string $date_arrivee, int $nb_total_places, int $nb_total_places_dispo, int $trajet_id): bool {
+    public function updateTrip(
+        int $agence_depart_id,
+        int $agence_arrive_id,
+        string $date_depart,
+        string $date_arrivee,
+        int $nb_total_places,
+        int $nb_total_places_dispo,
+        int $trajet_id
+    ): bool {
         $sql = "UPDATE trajets
-                SET agence_depart_id = :agence_depart_id,
-                    agence_arrivee_id = :agence_arrivee_id,
-                    date_depart = :date_depart,
-                    date_arrivee = :date_arrivee,
-                    nb_total_places = :nb_total_places,
-                    nb_total_places_dispo = :nb_total_places_dispo
+                SET agence_depart_id        = :agence_depart_id,
+                    agence_arrivee_id       = :agence_arrivee_id,
+                    date_depart             = :date_depart,
+                    date_arrivee            = :date_arrivee,
+                    nb_total_places         = :nb_total_places,
+                    nb_total_places_dispo   = :nb_total_places_dispo
                 WHERE trajets.id = :trajet_id";
+
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
@@ -175,6 +215,7 @@ class TripModel {
     public function deleteTrip(int $trajet_id): bool {
         $sql = "DELETE FROM trajets
                 WHERE trajets.id = :trajet_id";
+
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([

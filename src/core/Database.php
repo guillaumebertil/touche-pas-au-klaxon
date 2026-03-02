@@ -10,8 +10,8 @@ use PDOException;
  * 
  * Gère la connexion à la base de données
  */
-class Database {
-
+class Database
+{
     /**
      * L'objet PDO de connexion
      */
@@ -30,8 +30,8 @@ class Database {
      * @return PDO
      * @throws PDOException
      */
-    public static function getConnection(): PDO {
-
+    public static function getConnection(): PDO
+    {
         // Si la connexion n'existe pas, on la crée
         if (self::$instance === null) {
 

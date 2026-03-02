@@ -11,8 +11,8 @@ use App\Models\UserModel;
  * 
  * @package App\Controllers
  */
-class AuthController extends BaseController{
-
+class AuthController extends BaseController
+{
     /**
      * Affiche la page de connexion
      * 
@@ -21,8 +21,8 @@ class AuthController extends BaseController{
      * 
      * @return void
      */
-    public function index(): void {
-        
+    public function index(): void
+    {
         $this->render('auth');
     }
 
@@ -33,8 +33,8 @@ class AuthController extends BaseController{
      * 
      * @return void
      */
-    public function login(): void {
-
+    public function login(): void
+    {
         $requiredFields = [
             'email',
             'password'
@@ -80,8 +80,8 @@ class AuthController extends BaseController{
      * 
      * @return void
      */
-    public function logout(): void {
-
+    public function logout(): void
+    {
         // Détruire toutes les variables de session
         session_unset();
 

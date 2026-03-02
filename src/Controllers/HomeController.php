@@ -11,8 +11,8 @@ use App\Models\TripModel;
  * 
  * @package App\Controllers
  */
-class HomeController extends BaseController {
-
+class HomeController extends BaseController
+{
     /**
      * Affiche la page d'accueil
      * 
@@ -21,8 +21,8 @@ class HomeController extends BaseController {
      * 
      * @return void
      */
-    public function index(): void {
-        
+    public function index(): void
+    {
         $tripModel = new TripModel();
         $trips = $tripModel->getTrips();
         
