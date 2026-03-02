@@ -12,9 +12,12 @@
     <?php require 'header.php' ?>
 
     <!-- Main -->
-    <div class="d-flex justify-content-center align-items-center flex-grow-1 bg-light">
-        <?php require __DIR__ . '/../' . $view . '.php'; ?>
-    </div>
+    <main class="container-fluid d-flex justify-content-center align-items-center flex-grow-1 bg-light row">
+        <div class="w-75 container-fluid">
+            <?php require __DIR__ . '/flash_message.php'; ?>
+            <?php require __DIR__ . '/../' . $view . '.php'; ?>
+        </div>
+    </main>
     
     <!-- Footer -->
     <?php require 'footer.php' ?>

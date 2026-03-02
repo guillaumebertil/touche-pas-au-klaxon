@@ -1,9 +1,4 @@
 <div class="container">
-    <!-- Message d'erreur -->
-    <?php if (isset($_SESSION['flash-error'])) {
-        echo "<div class='alert alert-danger' role='alert'>{$_SESSION['flash-error']}</div>";
-        unset ($_SESSION['flash-error']);
-    } ?>
     
     <form action="<?= BASE_URL ?>/updateForm" method="POST">
     
