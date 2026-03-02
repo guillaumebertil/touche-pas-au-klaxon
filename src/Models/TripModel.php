@@ -22,9 +22,9 @@ class TripModel
      * 
      * @return void
      */
-    public function __construct()
+    public function __construct(PDO $pdo = null)
     {
-        $this->pdo = Database::getConnection();
+        $this->pdo = $pdo ?? Database::getConnection();
     }
 
     /**
